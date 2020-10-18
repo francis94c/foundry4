@@ -3,6 +3,7 @@
     "name": "francis94c/foundry4",
     "type": "library",
     "description": "Syntactic Sugar for Code Igniter 4's Database Forge. Used in Migration Classes, etc.",
+    "root": "src",
     "tags": [],
     "page": "https://github.com/francis94c/foundry4",
     "authors": [
