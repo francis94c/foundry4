@@ -289,7 +289,7 @@ class FieldBluePrint
     if ($this->autoIncrement) $field['auto_increment'] = true;
     if (!$this->unsigned) $field['unsigned'] = false; // Default True.
     if ($this->unique) $field['unique'] = true;
-    if ($this->default) $field['default'] = $this->default;
+    if ($this->default !== null) $field['default'] = $this->default;
 
     return $field;
   }
