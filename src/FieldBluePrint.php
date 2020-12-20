@@ -43,6 +43,13 @@ class FieldBluePrint
   public $default;
 
   /**
+   * Column Comment.
+   *
+   * @var string
+   */
+  public $comment;
+
+  /**
    * [public description]
    * @var [type]
    */
@@ -75,8 +82,7 @@ class FieldBluePrint
    */
   public function comment(string $comment):FieldBluePrint
   {
-    $comment = str_replace("'", "\\'", $comment);
-    $this->type .= " COMMENT '$comment'";
+    $this->comment = $comment;
     return $this;
   }
 
@@ -290,6 +296,7 @@ class FieldBluePrint
     if (!$this->unsigned) $field['unsigned'] = false; // Default True.
     if ($this->unique) $field['unique'] = true;
     if ($this->default !== null) $field['default'] = $this->default;
+    if ($this->comment) $field['comment'] = $this->comment;
 
     return $field;
   }
