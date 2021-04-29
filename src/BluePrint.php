@@ -16,13 +16,13 @@ class BluePrint
 
   /**
    * [private description]
-   * @var [type]
+   * @var array
    */
   private $fields = [];
 
   /**
    * [private description]
-   * @var [type]
+   * @var array
    */
   private $columnRenames = [];
 
@@ -610,6 +610,8 @@ class BluePrint
   {
     $fields = [];
 
+    $foreignKeys = [];
+
     // Drops
     foreach ($this->columnsToDrop as $column) {
       $forge->dropColumn($table, $column);
@@ -622,7 +624,17 @@ class BluePrint
         $toModify[$field->name] = $field->build();
         continue;
       }
+
+      if ($field->hasForeignKeyConstraint()) {
+        $foreignKeys[] = $field->getForeignKey($table);
+      }
+
       $fields[$field->name] = $field->build();
+    }
+
+    // Foreign Keys.
+    foreach ($foreignKeys as $foreignKey) {
+      $forge->addField($foreignKey);
     }
 
     // Modify
@@ -639,3 +651,4 @@ class BluePrint
     $forge->addColumn($table, $fields);
   }
 }
+
