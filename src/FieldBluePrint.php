@@ -20,7 +20,7 @@ class FieldBluePrint
 
   /**
    * [public description]
-   * @var [type]
+   * @var string
    */
   public $type;
 
@@ -66,7 +66,7 @@ class FieldBluePrint
    * @param string     $name       [description]
    * @param [type]     $constraint [description]
    */
-  function __construct(string $name, string $type, $constraint=null)
+  function __construct(string $name, string $type, $constraint = null)
   {
     $this->name = $name;
     $this->type = $type;
@@ -80,7 +80,7 @@ class FieldBluePrint
    * @param  string     $comment [description]
    * @return FieldBluePrint [description]
    */
-  public function comment(string $comment):FieldBluePrint
+  public function comment(string $comment): FieldBluePrint
   {
     $this->comment = $comment;
     return $this;
@@ -92,7 +92,7 @@ class FieldBluePrint
    * @param  boolean        $value [description]
    * @return FieldBluePrint        [description]
    */
-  public function nullable($value=true):FieldBluePrint
+  public function nullable($value = true): FieldBluePrint
   {
     $this->null = $value;
     return $this;
@@ -104,7 +104,7 @@ class FieldBluePrint
    * @param  bool           $primary [description]
    * @return FieldBluePrint          [description]
    */
-  public function primary($primary=true):FieldBluePrint
+  public function primary($primary = true): FieldBluePrint
   {
     $this->primaryKey = $primary;
     return $this;
@@ -115,7 +115,7 @@ class FieldBluePrint
    * @date   2019-12-30
    * @return FieldBluePrint [description]
    */
-  public function autoIncrement():FieldBluePrint
+  public function autoIncrement(): FieldBluePrint
   {
     $this->autoIncrement = true;
     return $this;
@@ -126,7 +126,7 @@ class FieldBluePrint
    * @date   2019-12-29
    * @return FieldBluePrint        [description]
    */
-  public function foreign():FieldBluePrint
+  public function foreign(): FieldBluePrint
   {
     $this->foreignKey[0] = $this->name;
     return $this;
@@ -138,7 +138,7 @@ class FieldBluePrint
    * @param  string         $field [description]
    * @return FieldBluePrint        [description]
    */
-  public function references(string $field):FieldBluePrint
+  public function references(string $field): FieldBluePrint
   {
     $this->foreignKey[1] = $field;
     return $this;
@@ -150,7 +150,7 @@ class FieldBluePrint
    * @param  string         $table [description]
    * @return FieldBluePrint        [description]
    */
-  public function on(string $table):FieldBluePrint
+  public function on(string $table): FieldBluePrint
   {
     $this->foreignKey[2] = $table;
     return $this;
@@ -161,7 +161,7 @@ class FieldBluePrint
    * @date   2019-12-29
    * @return bool       [description]
    */
-  public function hasForeignKeyConstraint():bool
+  public function hasForeignKeyConstraint(): bool
   {
     return ($this->foreignKey[0] ?? false) && ($this->foreignKey[1] ?? false) && ($this->foreignKey[2] ?? false);
   }
@@ -172,7 +172,7 @@ class FieldBluePrint
    * @param  string         $onDelete [description]
    * @return FieldBluePrint           [description]
    */
-  public function onDelete(string $onDelete):FieldBluePrint
+  public function onDelete(string $onDelete): FieldBluePrint
   {
     $this->foreignKey['on_delete'] = strtoupper($onDelete);
     return $this;
@@ -184,7 +184,7 @@ class FieldBluePrint
    * @param  string         $onUpdate [description]
    * @return FieldBluePrint           [description]
    */
-  public function onUpdate(string $onUpdate):FieldBluePrint
+  public function onUpdate(string $onUpdate): FieldBluePrint
   {
     $this->foreignKey['on_update'] = strtoupper($onUpdate);
     return $this;
@@ -195,12 +195,12 @@ class FieldBluePrint
    * @date   2019-12-29
    * @return string     [description]
    */
-  public function getForeignKey(string $table):string
+  public function getForeignKey(string $table): string
   {
     return @"CONSTRAINT {$table}_{$this->foreignKey[0]}_foreign FOREIGN KEY
     ({$this->foreignKey[0]}) REFERENCES {$this->foreignKey[2]}({$this->foreignKey[1]})"
-    .(isset($this->foreignKey['on_update']) ? " ON UPDATE {$this->foreignKey['on_update']}" : '')
-    .(isset($this->foreignKey['on_delete']) ? " ON DELETE {$this->foreignKey['on_delete']}" : '');
+      . (isset($this->foreignKey['on_update']) ? " ON UPDATE {$this->foreignKey['on_update']}" : '')
+      . (isset($this->foreignKey['on_delete']) ? " ON DELETE {$this->foreignKey['on_delete']}" : '');
   }
 
   /**
@@ -208,7 +208,7 @@ class FieldBluePrint
    * @date   2019-12-30
    * @return FieldBluePrint [description]
    */
-  public function useCurrent():FieldBluePrint
+  public function useCurrent(): FieldBluePrint
   {
     if (strpos($this->type, 'TIMESTAMP') !== false || strpos($this->type, 'DATETIME') !== false) {
       $this->type .= ' DEFAULT CURRENT_TIMESTAMP';
@@ -223,7 +223,7 @@ class FieldBluePrint
    * @date   2020-03-28
    * @return FieldBluePrint [description]
    */
-  public function useCurrentOnUpdate():FieldBluePrint
+  public function useCurrentOnUpdate(): FieldBluePrint
   {
     if (strpos($this->type, 'TIMESTAMP') !== false || strpos($this->type, 'DATETIME') !== false) {
       $this->type .= ' ON UPDATE CURRENT_TIMESTAMP';
@@ -234,13 +234,13 @@ class FieldBluePrint
   }
 
   /**
-   * [unique description]
+   * Make field unique.
    * @date   2019-12-28
    * @return FieldBluePrint [description]
    */
-  public function unique():FieldBluePrint
+  public function unique($unique = true): FieldBluePrint
   {
-    $this->unique = true;
+    $this->unique = $unique;
     return $this;
   }
 
@@ -249,7 +249,7 @@ class FieldBluePrint
    * @date   2019-12-30
    * @return FieldBluePrint [description]
    */
-  public function unsigned():FieldBluePrint
+  public function unsigned(): FieldBluePrint
   {
     $this->unsigned = true;
     return $this;
@@ -261,7 +261,7 @@ class FieldBluePrint
    * @param  [type]         $default [description]
    * @return FieldBluePrint          [description]
    */
-  public function default($default):FieldBluePrint
+  public function default($default): FieldBluePrint
   {
     $this->default = $default;
     return $this;
@@ -273,7 +273,7 @@ class FieldBluePrint
    * @date   2020-06-18
    * @return FieldBluePrint [description]
    */
-  public function change():FieldBluePrint
+  public function change(): FieldBluePrint
   {
     $this->modify = true;
     return $this;
@@ -284,7 +284,7 @@ class FieldBluePrint
    * @date   2019-12-29
    * @return array      [description]
    */
-  public function build():array
+  public function build(): array
   {
     $field = [
       'type' => $this->type,

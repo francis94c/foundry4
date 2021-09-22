@@ -130,6 +130,19 @@ class BluePrint
   }
 
   /**
+   * Creates a uuid (char(36)) field.
+   *
+   * @param  string $field
+   * @return FieldBluePrint
+   */
+  public function uuid(string $field): FieldBluePrint
+  {
+    $this->fields[] = new FieldBluePrint($field, 'CHAR', 36);
+    $this->fields[count($this->fields) - 1]->unique();
+    return $this->fields[count($this->fields) - 1];
+  }
+
+  /**
    * [index description]
    * @date   2020-01-06
    * @param  [type]         $index [description]
