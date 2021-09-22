@@ -271,6 +271,16 @@ class BluePrint
   }
 
   /**
+   * Undocumented function
+   *
+   * @return void
+   */
+  public function softDeletes(): void
+  {
+    $this->fields[] = new FieldBluePrint('deleted_at', 'TIMESTAMP');
+  }
+
+  /**
    * [text description]
    * @date   2019-12-30
    * @param  string         $field [description]
