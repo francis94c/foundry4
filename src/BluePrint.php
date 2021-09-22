@@ -28,9 +28,23 @@ class BluePrint
 
   /**
    * [private description]
-   * @var [type]
+   * @var string
    */
-  private $engine = 'InnoDB';
+  private $engine;
+
+  /**
+   * Table charset.
+   *
+   * @var string
+   */
+  private $charset;
+
+  /**
+   * Table collation.
+   *
+   * @var string
+   */
+  private $collation;
 
   /**
    * [private description]
@@ -535,13 +549,35 @@ class BluePrint
   }
 
   /**
-   * [engine description]
+   * Set table engine.
    * @date  2019-12-29
-   * @param string     $engine [description]
+   * @param string $engine [description]
    */
   public function engine(string $engine): void
   {
     $this->engine = $engine;
+  }
+
+  /**
+   * Set table charset.
+   *
+   * @param  string $charset
+   * @return void
+   */
+  public function charset(string $charset): void
+  {
+    $this->charset = $charset;
+  }
+
+  /**
+   * Set table collation
+   *
+   * @param  string $collation
+   * @return void
+   */
+  public function collation(string $collation): void
+  {
+    $this->collation = $collation;
   }
 
   /**
@@ -592,11 +628,12 @@ class BluePrint
       $forge->addField($foreignKey);
     }
 
-    $tableMetaData = [
-      'ENGINE' => $this->engine
-    ];
+    $tableMetaData = [];
 
+    if ($this->engine) $tableMetaData['ENGINE'] = $this->engine;
     if ($this->comment) $tableMetaData['COMMENT'] = "'$this->comment'";
+    if ($this->charset) $tableMetaData['CHARACTER SET'] = $this->charset;
+    if ($this->collation) $tableMetaData['COLLATE'] = $this->collation;
 
     $forge->createTable($table, true, $tableMetaData);
   }
@@ -651,4 +688,3 @@ class BluePrint
     $forge->addColumn($table, $fields);
   }
 }
-
