@@ -135,7 +135,7 @@ class BluePrint
    * @param  string $field
    * @return FieldBluePrint
    */
-  public function uuid(string $field): FieldBluePrint
+  public function &uuid(string $field): FieldBluePrint
   {
     $this->fields[] = new FieldBluePrint($field, 'CHAR', 36);
     $this->fields[count($this->fields) - 1]->unique();
