@@ -22,7 +22,7 @@ class Foundry
     }
 
     /**
-     * [update description]
+     * Update table scheme.
      * @date  2020-06-16
      * @method update
      * @param  string   $table          [description]
