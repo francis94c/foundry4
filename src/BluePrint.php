@@ -639,9 +639,9 @@ class BluePrint
   }
 
   /**
-   * [modify_table description]
-   * @method modify_table
-   * @param  string       $table [description]
+   * Modify table.
+   * @date   2019-12-28
+   * @param  string  $table [description]
    */
   private function modifyTable(string $table, Forge &$forge): void
   {
