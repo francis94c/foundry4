@@ -277,7 +277,7 @@ class BluePrint
    */
   public function softDeletes(): void
   {
-    $this->fields[] = new FieldBluePrint('deleted_at', 'TIMESTAMP');
+    ($this->fields[] = new FieldBluePrint('deleted_at', 'TIMESTAMP'))->nullable();
   }
 
   /**
