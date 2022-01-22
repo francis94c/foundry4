@@ -121,7 +121,7 @@ class BluePrint
    * @date   2019-12-28
    * @param  string     $field  [description]
    * @param  integer    $length [description]
-   * @return BluePrint          [description]
+   * @return FieldBluePrint          [description]
    */
   public function &string(string $field, int $length = 100): FieldBluePrint
   {
