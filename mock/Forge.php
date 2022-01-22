@@ -9,4 +9,5 @@ interface Forge {
     public function dropColumn();
     public function modifyColumn();
     public function addColumn();
+    public function addForeignKey();
 }

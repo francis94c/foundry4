@@ -204,6 +204,56 @@ class FieldBluePrint
   }
 
   /**
+   * Undocumented function
+   *
+   * @return string|null
+   */
+  public function getForeignInternalColumn(): ?string
+  {
+    return $this->foreignKey[0] ?? null;
+  }
+
+  /**
+   * Undocumented function
+   *
+   * @return string|null
+   */
+  public function getForeignExternalColumn(): ?string
+  {
+    return $this->foreignKey[1] ?? null;
+  }
+
+  /**
+   * Undocumented function
+   *
+   * @return string|null
+   */
+  public function getForeignExternalTable(): ?string
+  {
+    return $this->foreignKey[2] ?? null;
+  }
+
+  /**
+   * Undocumented function
+   *
+   * @return string|null
+   */
+  public function getForeignKeyOnUpdate(): ?string
+  {
+    return $this->foreignKey['on_update'] ?? null;
+  }
+
+  /**
+   * Undocumented function
+   *
+   * @return string|null
+   */
+  public function getForeignKeyOnDelete(): ?string
+  {
+    return $this->foreignKey['on_delete'] ?? null;
+  }
+
+  /**
    * [useCurrent description]
    * @date   2019-12-30
    * @return FieldBluePrint [description]

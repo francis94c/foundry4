@@ -629,13 +629,13 @@ class BluePrint
 
     $fields = [];
 
-    $foreignKeys = [];
+    $foreignFields = [];
 
     foreach ($this->fields as $field) {
       if ($field->primaryKey) $this->primaryKeys[] = $field->name;
 
       if ($field->hasForeignKeyConstraint()) {
-        $foreignKeys[] = $field->getForeignKey($table);
+        $foreignFields[] = $field;
       }
 
       $fields[$field->name] = $field->build();
@@ -647,8 +647,8 @@ class BluePrint
       $forge->addKey($primaryKey, true);
     }
 
-    foreach ($foreignKeys as $foreignKey) {
-      $forge->addField($foreignKey);
+    foreach ($foreignFields as $field) {
+      $forge->addForeignKey($field->getForeignInternalColumn(), $field->getForeignExternalTable(), $field->getForeignExternalColumn(), $field->getForeignKeyOnUpdate() ?? 'CASCADE', $field->getForeignKeyOnDelete()  ?? 'CASCADE');
     }
 
     $tableMetaData = [];
